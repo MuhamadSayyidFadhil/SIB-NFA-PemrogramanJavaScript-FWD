@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas Pertemuan 2 - Data Pegawai</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: 20px auto;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: lightyellow;
+      }
+      th, td {
+        padding: 10px;
+      }
+      thead {
+        background-color: lightblue;
+      }
+      tfoot {
+        font-weight: bold;
+        background-color: lightblue;
+      }
+      h2 {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Data Pegawai</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Nama Pegawai</th>
+          <th>Umur</th>
+          <th>Jabatan</th>
+          <th>Status</th>
+          <th>Gaji Pokok</th>
+          <th>Tunjangan Jabatan</th>
+          <th>BPJS</th>
+          <th>Tunjangan Keluarga</th>
+        </tr>
+      </thead>
+      <tbody id="data_pegawai"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7">Total Gaji</td>
+          <td id="total_gaji"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <script>
+      let pegawai = "Dodi Prayodi";
+      let umur = 25;
+      let jabatan = "Manajer";
+      let status = "Menikah";
+
+      let gapok = 0;
+      if (jabatan === "Manajer") {
+        gapok = 15000000;
+      } else if (jabatan === "Asisten Manajer") {
+        gapok = 10000000;
+      } else {
+        gapok = 5000000;
+      }
+
+      let tunjanganJabatan = 0.15 * gapok;
+      let bpjs = 0.1 * gapok;
+      let tunjanganKeluarga = status === "Menikah" ? 0.2 * gapok : 0;
+      let totalGaji = gapok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+      document.getElementById("data_pegawai").innerHTML = `
+        <tr>
+          <td>${pegawai}</td>
+          <td>${umur}</td>
+          <td>${jabatan}</td>
+          <td>${status}</td>
+          <td>${gapok.toLocaleString()}</td>
+          <td>${tunjanganJabatan.toLocaleString()}</td>
+          <td>${bpjs.toLocaleString()}</td>
+          <td>${tunjanganKeluarga.toLocaleString()}</td>
+        </tr>
+      `;
+
+      document.getElementById("total_gaji").innerText = totalGaji.toLocaleString();
+    </script>
+  </body>
+</html>
