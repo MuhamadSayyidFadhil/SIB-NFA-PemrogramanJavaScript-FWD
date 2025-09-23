@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Pertemuan 5 - Javascript</title>
+</head>
+<body>
+  <h2>Manajemen Produk Toko Online</h2>
+
+  <button id="tampilProduk">Tampilkan Produk</button>
+  <button id="tambahProduk">Tambah Produk</button>
+  <button id="hapusProduk">Hapus Produk</button>
+
+  <div id="output"></div>
+
+  <script>
+    let produkToko = [
+      {id: 1, nama: "Laptop", harga: 7000000},
+      {id: 2, nama: "Mouse", harga: 200000},
+      {id: 3, nama: "Keyboard", harga: 350000},
+      {id: 4, nama: "Monitor", harga: 1500000},
+      {id: 5, nama: "Printer", harga: 2000000}
+    ];
+
+    function tampilkanProduk() {
+      let output = "<h3>Daftar Produk</h3><ul>";
+      produkToko.forEach(({id, nama, harga}) => {
+        output += `<li>${id}. ${nama} - Rp${harga.toLocaleString()}</li>`;
+      });
+      output += "</ul>";
+      document.getElementById("output").innerHTML = output;
+    }
+
+    function tambahProdukBaru(nama, harga) {
+      const idBaru = produkToko.length + 1;
+      let produkBaru = {id: idBaru, nama, harga};
+      produkToko = [...produkToko, produkBaru];
+      alert(`Produk ${nama} berhasil ditambahkan!`);
+    }
+
+    function hapusProduk(...id) {
+      produkToko = produkToko.filter(p => !id.includes(p.id));
+      alert(`Produk dengan ID ${id} berhasil dihapus!`);
+    }
+
+    document.getElementById("tampilProduk").addEventListener("click", tampilkanProduk);
+    document.getElementById("tambahProduk").addEventListener("click", () => {
+      tambahProdukBaru("Webcam", 500000);
+      tampilkanProduk();
+    });
+    document.getElementById("hapusProduk").addEventListener("click", () => {
+      hapusProduk(2);
+      tampilkanProduk();
+    });
+  </script>
+</body>
+</html>
